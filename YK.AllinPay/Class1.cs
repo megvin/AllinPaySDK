@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using uniondemo.com.allinpay.syb;
 using YK.AllinPay.Pay;
+using YK.AllinPay.Pay.Model;
 
 namespace YK.AllinPay
 {
@@ -10,10 +11,10 @@ namespace YK.AllinPay
         public void pay()
         {
             SybWxPayService sybService = new SybWxPayService();
-            PayClient client = new PayClient();
-            var req = new UnionOrderPayRequest()
+            AllinPayClient client = new AllinPayClient();
+            var req = new UnionOrderRequest()
             {
-                trxamt = "1",
+                trxamt =1,
                 reqsn = DateTime.Now.ToFileTime().ToString(),
                 paytype = "W01",
                 body = "测试商品",
@@ -36,6 +37,28 @@ namespace YK.AllinPay
             var rsp = client.pay(req);
 
 
+        }
+
+        public void query()
+        {
+            var req = new QueryRequest()
+            {
+                trxid = "112024090001369129"
+            };
+            var clinet = new AllinPayClient();
+            var rsp = clinet.query(req);
+        }
+
+        public void cancel()
+        {
+            var req = new CancelRequest()
+            {
+                reqsn = DateTime.Now.ToFileTime().ToString(),
+                trxamt =1,
+                oldtrxid = "112024090001369129"
+            };
+            var clinet = new AllinPayClient();
+            var rsp = clinet.cancel(req);
         }
     }
 }

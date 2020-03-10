@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using YK.AllinPay.Common;
 
-namespace YK.AllinPay.Pay
+namespace YK.AllinPay.Pay.Model
 {
-    public class UnionOrderPayRequest : AbstractModel
+    public class UnionOrderRequest : AbstractModel
     {
         public long? trxamt { get; set; }
         /// <summary>
@@ -35,7 +35,7 @@ namespace YK.AllinPay.Pay
         /// </summary>
         public string acct { get; set; }
 
-        //public string authcode { get; set; }
+        public string authcode { get; set; }
 
 
         /// <summary>

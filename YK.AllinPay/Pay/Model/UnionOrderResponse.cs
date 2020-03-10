@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using YK.AllinPay.Common;
 
-namespace YK.AllinPay.Pay
+namespace YK.AllinPay.Pay.Model
 {
-   public class UnionOrderPayResponse
+   public class UnionOrderResponse: AbstractResponseModel
     {
-        public string retcode { get; set; }
-        /// <summary>
-        /// 返回信息
-        /// </summary>
-        public string retmsg { get; set; }
-        public string cusid { get; set; }
-        public string appid { get; set; }
         /// <summary>
         /// 交易单号
         /// </summary>
@@ -25,11 +19,6 @@ namespace YK.AllinPay.Pay
         /// 商户交易单号
         /// </summary>
         public string reqsn { get; set; }
-        public string randomstr { get; set; }
-        /// <summary>
-        /// 交易状态
-        /// </summary>
-        public string trxstatus { get; set; }
         /// <summary>
         /// 交易完成时间
         /// </summary>
@@ -42,7 +31,6 @@ namespace YK.AllinPay.Pay
         /// 支付串
         /// </summary>
         public string payinfo { get; set; }
-        public string sign { get; set; }
 
     }
 }
