@@ -60,5 +60,18 @@ namespace YK.AllinPay
             var clinet = new AllinPayClient();
             var rsp = clinet.cancel(req);
         }
+
+
+        public void cancel()
+        {
+            var req = new CancelRequest()
+            {
+                reqsn = DateTime.Now.ToFileTime().ToString(),
+                trxamt = 1,
+                oldtrxid = "112024090001369129"
+            };
+            var clinet = new AllinPayClient();
+            var rsp = clinet.cancel(req);
+        }
     }
 }
