@@ -36,13 +36,10 @@ namespace YK.AllinPay.Trx
 
                 var dic = this.InternalRequestDict(null, "get", param);
                 string fileUrl = "";
-               if(dic.ContainsKey("url"))
+                if (dic.ContainsKey("url"))
                 {
                     fileUrl = dic["url"];
                 }
-
-
-
             }
             catch (Exception e)
             {
