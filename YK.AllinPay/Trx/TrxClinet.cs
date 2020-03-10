@@ -8,9 +8,9 @@ namespace YK.AllinPay.Trx
 {
     public class TrxClinet : AbstractClient
     {
-        public TrxClinet(string endPoint) : base()
+        public TrxClinet()
         {
-            endPoint = "trxfile";
+            base.endPoint = "trxfile";
         }
 
         private Dictionary<String, String> buildBasicParam()

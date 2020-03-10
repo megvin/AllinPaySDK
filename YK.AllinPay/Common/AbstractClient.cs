@@ -78,7 +78,7 @@ namespace YK.AllinPay.Common
             basicParam.Add("sign", AppUtil.signParam(basicParam, AppConstants.APPKEY));
 
 
-            string strResp = HttpUtil.CreatePostHttpResponse(AppConstants.API_URL + actionName, basicParam, Encoding.UTF8);
+            string strResp = HttpUtil.CreatePostHttpResponse(AppConstants.API_URL + endPoint + "/" + actionName, basicParam, Encoding.UTF8);
 
             Dictionary<String, String> rspDic = (Dictionary<String, String>)JsonConvert.DeserializeObject(strResp, typeof(Dictionary<String, String>));
             if ("SUCCESS".Equals(rspDic["retcode"]))//验签

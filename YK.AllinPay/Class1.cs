@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using uniondemo.com.allinpay.syb;
 using YK.AllinPay.Pay;
 using YK.AllinPay.Pay.Model;
+using YK.AllinPay.Trx;
 
 namespace YK.AllinPay
 {
@@ -70,6 +71,12 @@ namespace YK.AllinPay
             };
             var clinet = new AllinPayClient();
             var rsp = clinet.close(req);
+        }
+
+        public void testfile()
+        {
+            var clinet = new TrxClinet();
+            clinet.trxfile(DateTime.Today.AddDays(-1));
         }
     }
 }
