@@ -7,8 +7,18 @@ using YK.AllinPay.Pay.Model;
 
 namespace YK.AllinPay.Pay
 {
-   public class AllinPayClient: AbstractClient
+    public class AllinPayClient : AbstractClient
     {
+        public AllinPayClient() 
+        {
+           base.endPoint = "unitorder";
+        }
+
+        /// <summary>
+        /// 统一下单接口
+        /// </summary>
+        /// <param name="req"></param>
+        /// <returns></returns>
         public UnionOrderResponse pay(UnionOrderRequest req)
         {
             UnionOrderResponse rsp = null;
@@ -40,6 +50,22 @@ namespace YK.AllinPay.Pay
             return rsp;
         }
 
+        public CloseResponse close(CloseRequest req)
+        {
+            CloseResponse rsp = null;
+            try
+            {
+                var strResp = this.InternalRequest(req, "close");
+
+                rsp = JsonConvert.DeserializeObject<CloseResponse>(strResp);
+            }
+            catch (JsonSerializationException e)
+            {
+                throw new Exception(e.Message);
+            }
+            return rsp;
+        }
+
 
         public CancelResponse cancel(CancelRequest req)
         {
@@ -58,22 +84,7 @@ namespace YK.AllinPay.Pay
         }
 
 
-        public CloseResponse close(CloseRequest req)
-        {
-            CloseResponse rsp = null;
-            try
-            {
-                var strResp = this.InternalRequest(req, "close");
-
-                rsp = JsonConvert.DeserializeObject<CloseResponse>(strResp);
-            }
-            catch (JsonSerializationException e)
-            {
-                throw new Exception(e.Message);
-            }
-            return rsp;
-        }
-
+     
 
         public RefundResponse refund(RefundRequest req)
         {

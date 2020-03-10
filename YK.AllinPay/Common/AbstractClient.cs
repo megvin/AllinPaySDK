@@ -10,8 +10,8 @@ namespace YK.AllinPay.Common
 {
     public class AbstractClient
     {
-        public const int HTTP_RSP_OK = 200;
-
+        protected string endPoint { get;  set; }
+       
         private Dictionary<String, String> buildBasicParam()
         {
             Dictionary<String, String> paramDic = new Dictionary<String, String>();
@@ -22,16 +22,27 @@ namespace YK.AllinPay.Common
             return paramDic;
 
         }
-
-        protected string InternalRequest(AbstractModel request, string actionName)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="request"></param>
+        /// <param name="actionName"></param>
+        /// <param name="paramDic">系统参数，不传默认。</param>
+        /// <returns></returns>
+        protected string InternalRequest(AbstractModel request, string actionName, Dictionary<String, String> basicParam = null)
         {
+            if (basicParam == null)
+            {
+                basicParam = buildBasicParam();
+            }
+            if (request != null)
+            {
+                request.ToMap(basicParam, "");
+            }
+            basicParam.Add("sign", AppUtil.signParam(basicParam, AppConstants.APPKEY));
 
-            Dictionary<String, String> paramDic = buildBasicParam();
-            request.ToMap(paramDic, "");
-            paramDic.Add("sign", AppUtil.signParam(paramDic, AppConstants.APPKEY));
 
-
-            string strResp = HttpUtil.CreatePostHttpResponse(AppConstants.API_URL + actionName, paramDic, Encoding.UTF8);
+            string strResp = HttpUtil.CreatePostHttpResponse(AppConstants.API_URL + endPoint+"/"+actionName, basicParam, Encoding.UTF8);
 
             Dictionary<String, String> rspDic = (Dictionary<String, String>)JsonConvert.DeserializeObject(strResp, typeof(Dictionary<String, String>));
             if ("SUCCESS".Equals(rspDic["retcode"]))//验签
@@ -53,16 +64,21 @@ namespace YK.AllinPay.Common
             }
         }
 
-        protected Dictionary<String, String> InternalRequestDict(AbstractModel request, string actionName)
+        protected Dictionary<String, String> InternalRequestDict(AbstractModel request, string actionName, Dictionary<String, String> basicParam = null)
         {
+            if (basicParam == null)
+            {
+                basicParam = buildBasicParam();
+            }
+            if (request != null)
+            {
+                request.ToMap(basicParam, "");
+            }
 
-            Dictionary<String, String> paramDic = buildBasicParam();
-            request.ToMap(paramDic, "");
-
-            paramDic.Add("sign", AppUtil.signParam(paramDic, AppConstants.APPKEY));
+            basicParam.Add("sign", AppUtil.signParam(basicParam, AppConstants.APPKEY));
 
 
-            string strResp = HttpUtil.CreatePostHttpResponse(AppConstants.API_URL + actionName, paramDic, Encoding.UTF8);
+            string strResp = HttpUtil.CreatePostHttpResponse(AppConstants.API_URL + actionName, basicParam, Encoding.UTF8);
 
             Dictionary<String, String> rspDic = (Dictionary<String, String>)JsonConvert.DeserializeObject(strResp, typeof(Dictionary<String, String>));
             if ("SUCCESS".Equals(rspDic["retcode"]))//验签

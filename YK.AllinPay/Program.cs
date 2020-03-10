@@ -18,7 +18,7 @@ namespace YKShip
 
 
             var test = new Class1();
-            test.close();
+            test.pay();
         }
     }
 }
