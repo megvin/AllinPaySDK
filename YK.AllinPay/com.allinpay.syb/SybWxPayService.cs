@@ -23,7 +23,7 @@ namespace uniondemo.com.allinpay.syb
 			paramDic.Add("idno", idno);
 			paramDic.Add("truename", truename);
 			paramDic.Add("asinfo", asinfo);
-			//paramDic.Add("sub_appid", "sub_appid");
+			paramDic.Add("sub_appid", "sub_appid");
 			paramDic.Add("sign", AppUtil.signParam(paramDic,AppConstants.APPKEY));
             return doRequest(paramDic,"/pay");
 	    }

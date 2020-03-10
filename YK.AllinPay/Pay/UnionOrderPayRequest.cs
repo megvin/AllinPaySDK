@@ -8,7 +8,7 @@ namespace YK.AllinPay.Pay
 {
     public class UnionOrderPayRequest : AbstractModel
     {
-        public string trxamt { get; set; }
+        public long? trxamt { get; set; }
         /// <summary>
         /// 商户交易单号
         /// </summary>
@@ -35,7 +35,7 @@ namespace YK.AllinPay.Pay
         /// </summary>
         public string acct { get; set; }
 
-     public string authcode { get; set; }
+        //public string authcode { get; set; }
 
 
         /// <summary>
@@ -51,7 +51,12 @@ namespace YK.AllinPay.Pay
 
         public string idno { get; set; }
         public string truename { get; set; }
+        /// <summary>
+        /// 有效期
+        /// </summary>
         public int? validtime { get; set; }
+
+
         /// <summary>
         /// 分账信息cusid:type:amount;type01按金额，02按比例
         /// </summary>
@@ -73,6 +78,7 @@ namespace YK.AllinPay.Pay
             this.SetParamSimple(map, prefix + "idno", this.idno);
             this.SetParamSimple(map, prefix + "truename", this.truename);
             this.SetParamSimple(map, prefix + "asinfo", this.asinfo);
+            this.SetParamSimple(map, prefix + "validtime", (this.validtime.HasValue ? this.validtime.Value.ToString() : ""));
             //this.SetParamSimple(map, prefix + "trxamt", this.trxamt);
             //this.SetParamArrayObj(map, prefix + "MediaInfoSet.", this.MediaInfoSet);
             //this.SetParamSimple(map, prefix + "RequestId", this.RequestId);

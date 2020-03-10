@@ -10,7 +10,7 @@ namespace YK.AllinPay
         public void pay()
         {
             SybWxPayService sybService = new SybWxPayService();
-            UnionOrderPayClient client = new UnionOrderPayClient();
+            PayClient client = new PayClient();
             var req = new UnionOrderPayRequest()
             {
                 trxamt = "1",
@@ -26,6 +26,7 @@ namespace YK.AllinPay
                 idno = "",
                 truename = "",
                 asinfo = "",
+                validtime =100
 
             };
 

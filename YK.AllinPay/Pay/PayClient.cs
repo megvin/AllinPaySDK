@@ -6,7 +6,7 @@ using YK.AllinPay.Common;
 
 namespace YK.AllinPay.Pay
 {
-   public class UnionOrderPayClient: AbstractClient
+   public class PayClient: AbstractClient
     {
         public UnionOrderPayResponse pay(UnionOrderPayRequest req)
         {
