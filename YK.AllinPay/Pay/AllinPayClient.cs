@@ -56,5 +56,39 @@ namespace YK.AllinPay.Pay
             }
             return rsp;
         }
+
+
+        public CloseResponse close(CloseRequest req)
+        {
+            CloseResponse rsp = null;
+            try
+            {
+                var strResp = this.InternalRequest(req, "close");
+
+                rsp = JsonConvert.DeserializeObject<CloseResponse>(strResp);
+            }
+            catch (JsonSerializationException e)
+            {
+                throw new Exception(e.Message);
+            }
+            return rsp;
+        }
+
+
+        public RefundResponse refund(RefundRequest req)
+        {
+            RefundResponse rsp = null;
+            try
+            {
+                var strResp = this.InternalRequest(req, "refund");
+
+                rsp = JsonConvert.DeserializeObject<RefundResponse>(strResp);
+            }
+            catch (JsonSerializationException e)
+            {
+                throw new Exception(e.Message);
+            }
+            return rsp;
+        }
     }
 }
