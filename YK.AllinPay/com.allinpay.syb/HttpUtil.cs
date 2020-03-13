@@ -96,5 +96,50 @@ namespace uniondemo.com.allinpay.syb
                                             // return sr.ReadToEnd();
 
         }
+
+        public static string post(string Url, string jsonParam)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(Url);
+            request.Method = "POST";
+            request.ContentType = "application/json;charset=UTF-8";
+            var byteData = Encoding.UTF8.GetBytes(jsonParam);
+            var length = byteData.Length;
+            request.ContentLength = length;
+            var writer = request.GetRequestStream();
+            writer.Write(byteData, 0, length);
+            writer.Close();
+
+            //接收数据
+            var response = (HttpWebResponse)request.GetResponse();
+            var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
+
+            return responseString;
+
+        }
+
+        public static string CreatePostResponse(string url, string datastr, Encoding charset)
+        {
+            HttpWebRequest request = null;
+            //HTTPSQ请求  
+            //ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
+            request = WebRequest.Create(url) as HttpWebRequest;
+            //request.ProtocolVersion = HttpVersion.Version10;
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+
+            request.UserAgent = DefaultUserAgent;
+            //如果需要POST数据     
+            if (!string.IsNullOrEmpty(datastr))
+            {
+                byte[] data = charset.GetBytes(datastr);
+                using (Stream stream = request.GetRequestStream())
+                {
+                    stream.Write(data, 0, data.Length);
+                }
+            }
+            Stream outstream = request.GetResponse().GetResponseStream();   //获取响应的字符串流  
+            StreamReader sr = new StreamReader(outstream); //创建一个stream读取流  
+            return sr.ReadToEnd();
+        }
     }
 }

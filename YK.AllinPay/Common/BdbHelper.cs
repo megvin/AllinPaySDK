@@ -36,6 +36,16 @@ namespace YK.AllinPay.Common
             return BitConverter.ToString(result);
         }
 
+        public static string StringMD5Base64Value(string str)
+        {
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            byte[] bytHash = md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(str));
+            md5.Clear();
+
+            string sTemp = Convert.ToBase64String(bytHash);
+            return sTemp;
+        }
+
 
         /// <summary>
         /// base64编码

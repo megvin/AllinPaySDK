@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using uniondemo.com.allinpay.syb;
 using YK.AllinPay;
 using YK.AllinPay.Common;
 
@@ -21,7 +22,7 @@ namespace YKShip
             var order = new BDCBMsgOrder();
             order.OrderHead = new BDCBOrderHead()
             {
-                orderNo = DateTime.Now.ToFileTime().ToString(),
+                orderNo = "132285599606544605",
                 orderType = "I",
                 billmode = "2",
                 assureCode = "340126067U",
@@ -84,12 +85,14 @@ namespace YKShip
             });
 
             string orderStr = JsonConvert.SerializeObject(order);
-            string checkcode = BdbHelper.encrypt(orderStr,"abcedefg", "UTF-8");
+            string checkcode = BdbHelper.StringMD5Base64Value(orderStr+"test_94776e14654ac5d5d58a773193a95af9e42");
 
-            var msg = new BDCBMessage() { CompanyCode = "gscode", Data = orderStr, MsgType = "Order", CheckCode = checkcode };
+            var msg = new BDCBMessage() { CompanyCode = "HFBG", Data = orderStr, MsgType = "Order", CheckCode = checkcode };
 
             var msgstr = JsonConvert.SerializeObject(msg);
 
+            string url = "http://ceb.bondex.com.cn:8831/Crossborder/Api/CebServices/SendBDCBMsg";
+            var result= HttpUtil.CreatePostResponse(url, msgstr, Encoding.UTF8);
 
 
             var test = new Class1();
