@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using YK.AllinPay;
+using YK.AllinPay.Common;
 
 namespace YKShip
 {
@@ -27,9 +28,9 @@ namespace YKShip
                 ebpCode = "340126067U",
                 ebpName = "合肥贝果供应链管理有限公司",
                 ebcCode = "340126067U",
-                ebcName = "电商企业名称",
+                ebcName = "合肥贝果供应链管理有限公司",
                 goodsValue = 80,
-                freight = 10,
+                freight = 20,
                 discount = 0,
                 taxTotal = 0,
                 acturalPaid = 100,
@@ -63,28 +64,29 @@ namespace YKShip
             order.OrderList = new List<BDCBOrderList>();
             order.OrderList.Add(new BDCBOrderList()
             {
-                ciqbarcode = "HSbm",
-                itemNo = "SKUno",
-                itemName = "XYZ保健品",
-                specifications = "500",
-                itemDescribe = "好东西必须来",
-                barCode = "20001200030",
-                unit = "瓶",
+                ciqbarcode = "2106909090",
+                itemNo = "20001002",
+                itemName = "测试商品",
+                specifications = "20",
+                itemDescribe = "",
+                barCode = "200010020011",
+                unit = "142",
                 qty = 1,
-                unit1 = "",
-                qty1 = 1,
+                unit1 = "035",
+                qty1 = 0.02m,
                 price = 80,
                 totalPrice = 80,
-                weight = 300,
-                netweight = 200,
+                weight = 0.3m,
+                netweight = 0.02m,
                 currency = "142",
-                country = "英国",
+                country = "303",
                 note = "",
             });
 
             string orderStr = JsonConvert.SerializeObject(order);
+            string checkcode = BdbHelper.encrypt(orderStr,"abcedefg", "UTF-8");
 
-            var msg = new BDCBMessage() { CompanyCode = "gscode", Data = orderStr, MsgType = "Order", CheckCode = "md5" };
+            var msg = new BDCBMessage() { CompanyCode = "gscode", Data = orderStr, MsgType = "Order", CheckCode = checkcode };
 
             var msgstr = JsonConvert.SerializeObject(msg);
 

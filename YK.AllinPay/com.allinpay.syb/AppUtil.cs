@@ -76,6 +76,19 @@ namespace uniondemo.com.allinpay.syb
             MD5 md5 = new MD5CryptoServiceProvider();
             byte[] result = md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(strText));
             return BitConverter.ToString(result).Replace("-", "");
-        }  
+        }
+
+
+        /// <summary>
+        /// md5加签
+        /// </summary>
+        /// <param name="strText"></param>
+        /// <returns></returns>
+        public static string MD5Encrypt2(string strText)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] result = md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(strText));
+            return BitConverter.ToString(result);
+        }
     }
 }
