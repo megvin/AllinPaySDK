@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CrossBorder.Model
+namespace Oms.Model
 {
     /// <summary>
     /// 海恒达消息报文
     /// </summary>
-    public class BDCBMessage
+    public class OmsMessage
     {
         /// <summary>
         /// 企业代码：海恒达系统分配的企业代码，必填

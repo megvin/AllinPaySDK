@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace YK.AllinPay.Common
+namespace Oms
 {
-    public class BdbHelper
+    public class OmsHelper
     {
+
+      
 
         ///<summary>
         ///电商Sign签名
