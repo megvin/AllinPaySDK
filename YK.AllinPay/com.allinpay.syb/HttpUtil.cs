@@ -100,45 +100,9 @@ namespace uniondemo.com.allinpay.syb
 
         }
 
-        public static string post1(string Url, string jsonParam)
-        {
-            var request = (HttpWebRequest)WebRequest.Create(Url);
-            request.Method = "POST";
-            request.ContentType = "application/x-www-form-urlencoded";
-            var byteData = Encoding.UTF8.GetBytes(jsonParam);
-            var length = byteData.Length;
-            request.ContentLength = length;
-            var writer = request.GetRequestStream();
-            writer.Write(byteData, 0, length);
-            writer.Close();
 
-            //接收数据
-            var response = (HttpWebResponse)request.GetResponse();
-            var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
 
-            return responseString;
 
-        }
-
-        public static string post(string Url, string jsonParam)
-        {
-            var request = (HttpWebRequest)WebRequest.Create(Url);
-            request.Method = "POST";
-            request.ContentType = "application/json;charset=UTF-8";
-            var byteData = Encoding.UTF8.GetBytes(jsonParam);
-            var length = byteData.Length;
-            request.ContentLength = length;
-            var writer = request.GetRequestStream();
-            writer.Write(byteData, 0, length);
-            writer.Close();
-
-            //接收数据
-            var response = (HttpWebResponse)request.GetResponse();
-            var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
-
-            return responseString;
-
-        }
 
         public static string postforRest(string url, string postDataStr)
         {
@@ -146,7 +110,7 @@ namespace uniondemo.com.allinpay.syb
             client.Timeout = -1;
             var request = new RestRequest(Method.POST);
             request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.AddParameter("data", postDataStr);
+            request.AddParameter("", postDataStr);
             IRestResponse response = client.Execute(request);
             Console.WriteLine(response.Content);
             return response.Content;
@@ -155,13 +119,10 @@ namespace uniondemo.com.allinpay.syb
         public static string CreatePostResponse(string url, string datastr, Encoding charset)
         {
             HttpWebRequest request = null;
-            //HTTPSQ请求  
-            //ServicePointManager.ServerCertificateValidationCallback = new RemoteCertificateValidationCallback(CheckValidationResult);
+
             request = WebRequest.Create(url) as HttpWebRequest;
-            //request.ProtocolVersion = HttpVersion.Version10;
             request.Method = "POST";
             request.ContentType = "application/x-www-form-urlencoded";
-
             request.UserAgent = DefaultUserAgent;
             //如果需要POST数据     
             if (!string.IsNullOrEmpty(datastr))
@@ -172,10 +133,15 @@ namespace uniondemo.com.allinpay.syb
                     stream.Write(data, 0, data.Length);
                 }
             }
-            Stream outstream = request.GetResponse().GetResponseStream();   //获取响应的字符串流  
-            StreamReader sr = new StreamReader(outstream); //创建一个stream读取流  
+            string result = string.Empty;
 
-            return sr.ReadToEnd();
+            using (Stream outstream = request.GetResponse().GetResponseStream())    //获取响应的字符串流  
+            using (StreamReader sr = new StreamReader(outstream))
+            {
+                result = sr.ReadToEnd();
+            }; //创建一个stream读取流  
+
+            return result;
         }
     }
 }

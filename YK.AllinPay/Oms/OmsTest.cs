@@ -85,7 +85,7 @@ namespace YK.AllinPay.Oms
             var msgstr = JsonConvert.SerializeObject(msg);
 
             string url = "http://ceb.bondex.com.cn:8831/Crossborder/Api/CebServices/SendBDCBMsg";
-            var result = HttpUtil.CreatePostResponse(url, msgstr, Encoding.UTF8);
+            var result = HttpUtil.CreatePostResponse(url, msgstr,Encoding.UTF8);
             Console.WriteLine(result);
         }
     }

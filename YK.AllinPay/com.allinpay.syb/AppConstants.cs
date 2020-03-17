@@ -13,7 +13,7 @@ namespace uniondemo.com.allinpay.syb
         public static String APIVERSION = "11";
         public static String API_URL = "https://vsp.allinpay.com/apiweb/";
 
-        #region 海关推送部分常量
+        #region 海关支付推送部分常量
         /// <summary>
         /// 支付海关推送相关
         /// </summary>
