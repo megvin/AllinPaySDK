@@ -6,6 +6,8 @@ using System.Text;
 using uniondemo.com.allinpay.syb;
 using YK.AllinPay;
 using YK.AllinPay.Common;
+using YK.AllinPay.customspush;
+using YK.AllinPay.Oms;
 
 namespace YKShip
 {
@@ -18,11 +20,16 @@ namespace YKShip
         static void Main()
         {
 
-            
+            //var helper = new QdCustomsHelper();
+            //helper.test();
 
 
-            var test = new Class1();
+           var test = new Class1();
             //test.testfile();
+
+            var oms = new OmsTest();
+            oms.test();
+
         }
     }
 }

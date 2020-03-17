@@ -78,7 +78,7 @@ namespace YK.AllinPay.Oms
             });
 
             string orderStr = JsonConvert.SerializeObject(order);
-            string checkcode = OmsHelper.StringMD5Base64Value(orderStr + "test_94776e14654ac5d5d58a773193a95af9e42");
+            string checkcode = AppUtil.StringMD5Base64Value(orderStr + "test_94776e14654ac5d5d58a773193a95af9e42");
 
             var msg = new OmsMessage() { CompanyCode = "HFBG", Data = orderStr, MsgType = "Order", CheckCode = checkcode };
 
@@ -86,6 +86,7 @@ namespace YK.AllinPay.Oms
 
             string url = "http://ceb.bondex.com.cn:8831/Crossborder/Api/CebServices/SendBDCBMsg";
             var result = HttpUtil.CreatePostResponse(url, msgstr, Encoding.UTF8);
+            Console.WriteLine(result);
         }
     }
 }

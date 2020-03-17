@@ -65,6 +65,7 @@ namespace YK.AllinPay.customspush
         {
             StringBuilder sb = new StringBuilder("<HEAD>");
             sb.Append($"<VERSION>{"v5.6"}</VERSION>");
+            sb.Append($"<VISITOR_ID>MCT</VISITOR_ID>");
             sb.Append($"<MCHT_ID>{this.MCHT_ID}</MCHT_ID>");
             sb.Append($"<ORDER_NO>{this.ORDER_NO}</ORDER_NO>");
             sb.Append($"<TRANS_DATETIME>{DateTime.Now.ToString("yyyyMMddHHssmm")}</TRANS_DATETIME>");
@@ -80,11 +81,6 @@ namespace YK.AllinPay.customspush
         {
             StringBuilder sb = new StringBuilder("<BODY>");
             sb.Append($"<CUSTOMS_CODE>{this.CUSTOMS_CODE}</CUSTOMS_CODE>");
-            sb.Append($"<PAYMENT_CHANNEL>{this.PAYMENT_CHANNEL}</PAYMENT_CHANNEL>");
-            sb.Append($"<CUS_ID>{this.CUS_ID}</CUS_ID>");
-            sb.Append($"<PAYMENT_DATETIME>{this.PAYMENT_DATETIME}</PAYMENT_DATETIME>");
-            sb.Append($"<MCHT_ORDER_NO>{this.MCHT_ORDER_NO}</MCHT_ORDER_NO>");
-            sb.Append($"<PAYMENT_CHANNEL>{this.PAYMENT_CHANNEL}</PAYMENT_CHANNEL>");
             sb.Append($"<PAYMENT_CHANNEL>{this.PAYMENT_CHANNEL}</PAYMENT_CHANNEL>");
             sb.Append($"<CUS_ID>{this.CUS_ID}</CUS_ID>");
             sb.Append($"<PAYMENT_DATETIME>{this.PAYMENT_DATETIME}</PAYMENT_DATETIME>");
@@ -105,7 +101,7 @@ namespace YK.AllinPay.customspush
             return sb.ToString();
         }
 
-        public string GetXml()
+        public string GetPostData()
         {
             StringBuilder sb = new StringBuilder("<PAYMENT_INFO>");
             sb.Append(GetHeadXml());
@@ -122,7 +118,7 @@ namespace YK.AllinPay.customspush
             sb.Append(GetBodyXml());
             sb.Append($"<key>{AppConstants.PAY_MD5KEY}</key>");
 
-            return AppUtil.MD5Encrypt2(sb.ToString());
+            return AppUtil.MD5Encrypt(sb.ToString());
 
 
         }

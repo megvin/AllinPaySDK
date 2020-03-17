@@ -78,17 +78,16 @@ namespace uniondemo.com.allinpay.syb
             return BitConverter.ToString(result).Replace("-", "");
         }
 
-
-        /// <summary>
-        /// md5加签
-        /// </summary>
-        /// <param name="strText"></param>
-        /// <returns></returns>
-        public static string MD5Encrypt2(string strText)
+        public static string StringMD5Base64Value(string str)
         {
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] result = md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(strText));
-            return BitConverter.ToString(result);
+            MD5CryptoServiceProvider md5 = new MD5CryptoServiceProvider();
+            byte[] bytHash = md5.ComputeHash(System.Text.Encoding.UTF8.GetBytes(str));
+            md5.Clear();
+
+            string sTemp = Convert.ToBase64String(bytHash);
+            return sTemp;
         }
+
+
     }
 }

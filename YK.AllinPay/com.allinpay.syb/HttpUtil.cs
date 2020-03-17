@@ -1,6 +1,9 @@
-﻿using System;
+﻿
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.IO;
+using System.IO.Compression;
 using System.Linq;
 using System.Net;
 using System.Net.Security;
@@ -97,6 +100,26 @@ namespace uniondemo.com.allinpay.syb
 
         }
 
+        public static string post1(string Url, string jsonParam)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(Url);
+            request.Method = "POST";
+            request.ContentType = "application/x-www-form-urlencoded";
+            var byteData = Encoding.UTF8.GetBytes(jsonParam);
+            var length = byteData.Length;
+            request.ContentLength = length;
+            var writer = request.GetRequestStream();
+            writer.Write(byteData, 0, length);
+            writer.Close();
+
+            //接收数据
+            var response = (HttpWebResponse)request.GetResponse();
+            var responseString = new StreamReader(response.GetResponseStream(), Encoding.GetEncoding("utf-8")).ReadToEnd();
+
+            return responseString;
+
+        }
+
         public static string post(string Url, string jsonParam)
         {
             var request = (HttpWebRequest)WebRequest.Create(Url);
@@ -115,6 +138,18 @@ namespace uniondemo.com.allinpay.syb
 
             return responseString;
 
+        }
+
+        public static string postforRest(string url, string postDataStr)
+        {
+            var client = new RestClient(url);
+            client.Timeout = -1;
+            var request = new RestRequest(Method.POST);
+            request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.AddParameter("data", postDataStr);
+            IRestResponse response = client.Execute(request);
+            Console.WriteLine(response.Content);
+            return response.Content;
         }
 
         public static string CreatePostResponse(string url, string datastr, Encoding charset)
@@ -139,6 +174,7 @@ namespace uniondemo.com.allinpay.syb
             }
             Stream outstream = request.GetResponse().GetResponseStream();   //获取响应的字符串流  
             StreamReader sr = new StreamReader(outstream); //创建一个stream读取流  
+
             return sr.ReadToEnd();
         }
     }

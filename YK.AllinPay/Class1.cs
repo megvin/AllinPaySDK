@@ -11,7 +11,7 @@ namespace YK.AllinPay
     {
         public void pay()
         {
-            SybWxPayService sybService = new SybWxPayService();
+            //SybWxPayService sybService = new SybWxPayService();
             AllinPayClient client = new AllinPayClient();
             var req = new UnionOrderRequest()
             {

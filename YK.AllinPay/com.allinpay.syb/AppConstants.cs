@@ -25,12 +25,12 @@ namespace uniondemo.com.allinpay.syb
         /// <summary>
         /// 报关用的商户号
         /// </summary>
-        public static string MCHT_ID { get; set; }
+        public static string MCHT_ID = "109123456123456";
 
         /// <summary>
         /// 支付用的商户号
         /// </summary>
-        public static string CUS_ID { get; set; }
+        public static string CUS_ID = "8215810949800UR";
         /// <summary>
         /// 海关类别
         /// </summary>
@@ -39,7 +39,7 @@ namespace uniondemo.com.allinpay.syb
         public static string ESHOP_ENT_CODE = "340126067U";
         public static string ESHOP_ENT_NAME = "合肥贝果供应链管理有限公司";
 
-        public static string PAY_MD5KEY = "abcdeef";
+        public static string PAY_MD5KEY = "1234567890";
 
         #endregion 
 
