@@ -9,9 +9,9 @@ namespace YK.AllinPay.Pay
 {
     public class AllinPayClient : AbstractClient
     {
-        public AllinPayClient() 
+        public AllinPayClient()
         {
-           base.endPoint = "unitorder";
+            base.endPoint = "unitorder";
         }
 
         /// <summary>
@@ -66,7 +66,6 @@ namespace YK.AllinPay.Pay
             return rsp;
         }
 
-
         public CancelResponse cancel(CancelRequest req)
         {
             CancelResponse rsp = null;
@@ -82,9 +81,6 @@ namespace YK.AllinPay.Pay
             }
             return rsp;
         }
-
-
-     
 
         public RefundResponse refund(RefundRequest req)
         {

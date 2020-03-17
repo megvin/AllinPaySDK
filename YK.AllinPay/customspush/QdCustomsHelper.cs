@@ -4,7 +4,7 @@ using System.Text;
 using System.Xml;
 using uniondemo.com.allinpay.syb;
 
-namespace YK.AllinPay.customspush
+namespace YK.AllinPay.Customspush
 {
     public class QdCustomsHelper
     {

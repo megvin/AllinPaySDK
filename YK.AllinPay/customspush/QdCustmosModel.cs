@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using uniondemo.com.allinpay.syb;
 
-namespace YK.AllinPay.customspush
+namespace YK.AllinPay.Customspush
 {
     public class QdCustmosModel
     {

@@ -6,7 +6,7 @@ using System.Text;
 using uniondemo.com.allinpay.syb;
 using YK.AllinPay;
 using YK.AllinPay.Common;
-using YK.AllinPay.customspush;
+using YK.AllinPay.Customspush;
 using YK.AllinPay.Oms;
 
 namespace YKShip
